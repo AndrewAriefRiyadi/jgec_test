@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Certification;
+use App\Models\Company;
+use App\Models\School;
+use App\Models\Student;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +17,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Buat Murid yang memiliki 1 - 2 history sekolah, bekerja, certif
+        $student_count = 50;
+        Student::factory($student_count)->create()->each(function ($student) {
+            $student->schools()->saveMany(
+                School::factory(rand(1, 2))->make()
+            );
+            
+            $student->companies()->saveMany(
+                Company::factory(rand(1, 2))->make()
+            );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+            $student->certifications()->saveMany(
+                Certification::factory(rand(1, 2))->make()
+            );
+        });
     }
 }
