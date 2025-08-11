@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
@@ -21,6 +22,6 @@ Route::post('/company/create/{student_id}', [CompanyController::class, 'insert']
 Route::delete('/company/delete/{id}/{student_id}', [CompanyController::class, 'delete'])->name('company.delete');
 
 
-Route::get('/certification/create/{student_id}', [CertificationController::class, 'create'])->name('certification.create');
-Route::post('/certification/create/{student_id}', [CertificationController::class, 'insert'])->name('certification.insert');
-Route::delete('/certification/delete/{id}/{student_id}', [CertificationController::class, 'delete'])->name('certification.delete');
+Route::get('/certification/create/{student_id}', [CertificationController::class, 'create'])->name('certif.create');
+Route::post('/certification/create/{student_id}', [CertificationController::class, 'insert'])->name('certif.insert');
+Route::delete('/certification/delete/{id}/{student_id}', [CertificationController::class, 'delete'])->name('certif.delete');

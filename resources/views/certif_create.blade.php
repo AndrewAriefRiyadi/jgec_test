@@ -2,9 +2,9 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create Company</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Certification</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -23,39 +23,36 @@
 
     <div class="w-full shadow p-8">
         <div class="mb-6 flex justify-end">
-            <a href="{{route('certif.create',$student_id)}}"
-                class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
+            <a href="#" class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
                 ← Selanjutnya
             </a>
         </div>
 
-        <h1 class=" text-2xl font-semibold underline text-center">Riwayat Perusahaan {{ $student_name }}</h1>
-        <div class=" flex justify-center">
-            @if ($companies->isEmpty())
-                <h1 class=" text-2xl font-semibold text-red-500 my-4">Belum mempunyai riwayat perusahaan!</h1>
+        <h1 class="text-2xl font-semibold underline text-center">Riwayat Sertifikasi {{ $student_name }}</h1>
+        <div class="flex justify-center">
+            @if ($certifications->isEmpty())
+                <h1 class="text-2xl font-semibold text-red-500 my-4">Belum mempunyai riwayat sertifikasi!</h1>
             @else
                 <table class="table-auto lg:min-w-2xl my-4">
                     <thead>
                         <tr>
                             <th class="p-2">No</th>
-                            <th>Nama Perusahaan</th>
-                            <th>Tahun Masuk</th>
-                            <th>Bulan Masuk</th>
-                            <th>Status</th>
+                            <th>Nama Sertifikasi</th>
+                            <th>Tahun</th>
+                            <th>Bulan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($companies as $company)
+                        @foreach ($certifications as $certif)
                             <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition-colors">
                                 <td class="text-center p-2">{{ $loop->iteration }}</td>
-                                <td class="text-center p-2">{{ $company->nama_perusahaan }}</td>
-                                <td class="text-center p-2">{{ $company->tahun_masukperusahaan }}</td>
-                                <td class="text-center p-2">{{ $company->bulan_masukperusahaan }}</td>
-                                <td class="text-center p-2">{{ $company->status}}</td>
+                                <td class="text-center p-2">{{ $certif->nama_certif }}</td>
+                                <td class="text-center p-2">{{ $certif->tahun }}</td>
+                                <td class="text-center p-2">{{ $certif->bulan }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('company.delete', [$company->id, $student_id]) }}"
-                                        method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                    <form action="{{ route('certif.delete', [$certif->id, $student_id]) }}" method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -78,47 +75,37 @@
                 </table>
             @endif
         </div>
-        <h1 class="text-2xl font-semibold mb-6 underline">Tambah Data Perusahaan</h1>
-        <form action="#" method="POST"
+
+        <h1 class="text-2xl font-semibold mb-6 underline">Tambah Data Sertifikasi</h1>
+        <form action="{{ route('certif.insert', $student_id) }}" method="POST"
             class="space-y-4 grid lg:grid-cols-2 gap-x-6">
             @csrf
 
-            <!-- Nama Perusahaan -->
+            <!-- Nama Sertifikasi -->
             <div>
-                <label class="block mb-1 font-semibold">Nama Perusahaan</label>
-                <input type="text" name="nama_perusahaan"
+                <label class="block mb-1 font-semibold">Nama Sertifikasi</label>
+                <input type="text" name="nama_certif"
                     class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
-                    placeholder="PT Maju Jaya" maxlength="255" required>
+                    placeholder="Sertifikasi ABC" maxlength="255" required>
             </div>
 
-            <!-- Tahun Masuk -->
+            <!-- Tahun -->
             <div>
-                <label class="block mb-1 font-semibold">Tahun Masuk</label>
-                <input type="number" name="tahun_masukperusahaan"
+                <label class="block mb-1 font-semibold">Tahun</label>
+                <input type="number" name="tahun"
                     class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
-                    placeholder="2018" max="{{ date('Y') }}" required>
+                    placeholder="2023" max="{{ date('Y') }}" min="1900" required>
             </div>
 
-            <!-- Bulan Masuk -->
+            <!-- Bulan -->
             <div>
-                <label class="block mb-1 font-semibold">Bulan Masuk</label>
-                <select name="bulan_masukperusahaan"
+                <label class="block mb-1 font-semibold">Bulan</label>
+                <select name="bulan"
                     class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
                     required>
                     @foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $bulan)
                         <option value="{{ $bulan }}">{{ $bulan }}</option>
                     @endforeach
-                </select>
-            </div>
-
-            <!-- Status Kerja -->
-            <div>
-                <label class="block mb-1 font-semibold">Status Kerja</label>
-                <select name="status"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
-                    required>
-                    <option value="Masuk">Masuk</option>
-                    <option value="Berhenti">Berhenti</option>
                 </select>
             </div>
 
