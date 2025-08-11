@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
+use App\Models\School;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StudentController::class, 'index'])->name('home');
@@ -11,3 +12,7 @@ Route::get('/student/{id}', [StudentController::class, 'detail'])->name('student
 Route::delete('/student/{id}', [StudentController::class, 'delete'])->name('student.delete');
 
 Route::get('/school/create/{student_id}', [SchoolController::class, 'create'])->name('school.create');
+Route::post('/school/create/{student_id}', [SchoolController::class, 'insert'])->name('school.insert');
+Route::delete('/school/delete/{id}/{student_id}', [SchoolController::class, 'delete'])->name('school.delete');
+
+Route::get('/company/create/{student_id}', [SchoolController::class, 'create'])->name('school.create');

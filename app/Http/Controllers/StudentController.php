@@ -61,7 +61,6 @@ class StudentController extends Controller
         } catch (\Throwable $th){
             return redirect()->back()->with('error',$th->getMessage())->withInput();
         }
-
     }
 
     public function delete($id)
