@@ -10,7 +10,7 @@
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] flex p-16 flex-col">
     @if (session('success'))
-        <div class="bg-red-900 text-white px-2 py-2 mb-4 rounded">
+        <div class="bg-green-800 text-white px-2 py-2 mb-4 rounded">
             <p> {{ session('success') }}</p>
         </div>
     @endif
@@ -19,52 +19,189 @@
             <p>Terjadi Kesalahan: {{ session('error') }}</p>
         </div>
     @endif
-    <div class="container py-5">
-        <div class="card shadow">
-            <div class="card-header">
-                <h4>Step 1: Data Student</h4>
-            </div>
-            <div class="card-body">
-                <form action="/step2" method="POST">
-                    @csrf
-
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" class="form-control"
-                            placeholder="Masukkan nama lengkap" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="birth_date" class="form-label">Tanggal Lahir</label>
-                        <input type="date" id="birth_date" name="birth_date" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-control"
-                            placeholder="Masukkan email" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">No. Telepon</label>
-                        <input type="text" id="phone" name="phone" class="form-control"
-                            placeholder="Masukkan nomor telepon" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Alamat</label>
-                        <textarea id="address" name="address" class="form-control" rows="3" placeholder="Masukkan alamat lengkap"
-                            required></textarea>
-                    </div>
-
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Next &raquo;</button>
-                    </div>
-                </form>
-            </div>
+    <div class="w-full shadow p-8">
+        <div class="mb-6">
+            <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
+                ← Kembali
+            </a>
         </div>
+        <h1 class="text-2xl font-semibold mb-6 underline">Create Student</h1>
+        <form action="/student/create" method="POST" class="space-y-4 grid lg:grid-cols-2 gap-x-6 ">
+            @csrf
+            <div>
+                <label class="block mb-1 font-semibold">NIS</label>
+                <input type="text" name="nis"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="12345678" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Nama</label>
+                <input type="text" name="nama"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="Andrew Arief Riyadi" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Gender</label>
+                <select name="gender"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    required>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Status Pernikahan</label>
+                <select name="nikah"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    required>
+                    <option value="Belum Menikah">Belum Menikah</option>
+                    <option value="Menikah">Menikah</option>
+                </select>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Tanggal Lahir</label>
+                <input type="date" name="tanggal_lahir"
+                    class="w-full bg-gray-100  p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 invalid:border invalid:border-red-500"
+                    required max="{{ date('Y-m-d') }}">
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Umur</label>
+                <input type="number" name="umur"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="22" required min="1" oninput="if(this.value < 0) this.value = 0">
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Kewarganegaraan</label>
+                <input type="text" name="kewarganegaraan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="Indonesia" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Bahasa</label>
+                <input type="text" name="bahasa"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="Jepang" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Domisili</label>
+                <input type="text" name="domisili"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="DKI Jakarta" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Nomor Telepon</label>
+                <input type="text" name="nomor"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="0821123412" pattern="[0-9]+" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Email</label>
+                <input type="email" name="email"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="otwjepang@gmail.com" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Tinggi Badan (cm)</label>
+                <input type="number" name="tinggi_badan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="185" min="30" required oninput="if(this.value < 0) this.value = 0">
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Berat Badan (kg)</label>
+                <input type="number" name="berat_badan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="60" min="10" required oninput="if(this.value < 0) this.value = 0">
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Ukuran Sepatu</label>
+                <input type="number" name="ukuran_sepatu"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="39" min="20" required oninput="if(this.value < 0) this.value = 0">
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Agama</label>
+                <input type="text" name="agama"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="Islam" required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Kelebihan</label>
+                <input type="text" name="kelebihan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="Mudah beradaptasi, Suka belajar ..." required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Kekurangan</label>
+                <input type="text" name="kekurangan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="Emosional, ..." required>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Promosi</label>
+                <textarea name="promosi"
+                    class="w-full bg-gray-100 p2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 py-1 px-2 placeholder-shown:border placeholder-shown:border-red-500"
+                    maxlength="255" placeholder="Saya orangnya suka belajar.." required></textarea>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Pernah Tinggal di JP?</label>
+                <select name="tinggal_jp" id="tinggal_jp"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500">
+                    <option value="Tidak">Tidak</option>
+                    <option value="Ya">Ya</option>
+                </select>
+            </div>
+            
+            <div>
+                <label class="block mb-1 font-semibold">Keterangan Tinggal di JP</label>
+                <input type="text" name="keterangan_tinggal_jp" id="keterangan_tinggal_jp"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition"
+                    maxlength="255" placeholder="Bekerja selama 1 tahun..">
+            </div>
+            
+            <div class="pt-4">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 transition">
+                    Submit
+                </button>
+            </div>
+        </form>
     </div>
-
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectJP = document.getElementById('tinggal_jp');
+        const inputKet = document.getElementById('keterangan_tinggal_jp');
+
+        function toggleRequired() {
+            if (selectJP.value === 'Ya') {
+                inputKet.setAttribute('required', true);
+                inputKet.classList.add('border', 'border-red-500');
+            } else {
+                inputKet.removeAttribute('required');
+                inputKet.classList.remove('border', 'border-red-500');
+            }
+        }
+
+        selectJP.addEventListener('change', toggleRequired);
+        toggleRequired(); 
+    });
+</script>
 
 </html>

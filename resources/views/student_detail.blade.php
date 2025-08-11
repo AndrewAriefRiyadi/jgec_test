@@ -10,7 +10,7 @@
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] p-8">
     @if (session('success'))
-        <div class="bg-red-900 text-white px-2 py-2 mb-4 rounded">
+        <div class="bg-green-800 text-white px-2 py-2 mb-4 rounded">
             <p> {{ session('success') }}</p>
         </div>
     @endif
@@ -57,7 +57,6 @@
                 </form>
             </div>
         </div>
-
 
         <div class="grid grid-cols-2 gap-4">
             <div><span class="font-semibold">NIS:</span> {{ $student->nis }}</div>
@@ -121,7 +120,7 @@
 
 
         <div class="mt-6">
-            <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+            <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
                 ← Kembali
             </a>
         </div>
