@@ -26,7 +26,7 @@ class StudentFactory extends Factory
             'kewarganegaraan' => $this->faker->country(),
             'bahasa' => $this->faker->randomElement(['Indonesia', 'Inggris', 'Jepang']),
             'domisili' => $this->faker->city(),
-            'nomor' => $this->faker->phoneNumber(),
+            'nomor' => $this->faker->numerify('08########'),
             'email' => $this->faker->safeEmail(),
             'tinggi_badan' => $this->faker->numberBetween(150, 190),
             'berat_badan' => $this->faker->numberBetween(45, 90),

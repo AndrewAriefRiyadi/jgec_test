@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("student_id")->constrained()->cascadeOnDelete();
             $table->string("nama_perusahaan");
             $table->integer("tahun_masukperusahaan");
-            $table->integer("bulan_masukperusahaan");
+            $table->string("bulan_masukperusahaan");
             $table->string("status");
         });
     }

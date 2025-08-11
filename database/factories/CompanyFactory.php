@@ -19,7 +19,7 @@ class CompanyFactory extends Factory
         return [
             'nama_perusahaan' => $this->faker->company(),
             'tahun_masukperusahaan' => $this->faker->year(),
-            'bulan_masukperusahaan' => $this->faker->numberBetween(1, 12),
+            'bulan_masukperusahaan' => $this->faker->monthName(),
             'status' => $this->faker->randomElement(['Masuk', 'Resign']),
         ];
     }
