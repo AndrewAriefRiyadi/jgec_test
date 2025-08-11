@@ -9,11 +9,55 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::paginate(10);
-        return view('index', compact(['students']));
+        // Mulai query builder untuk model Student (atau sesuaikan modelnya)
+        $query = Student::query();
+
+        // Filter Nama (LIKE)
+        if ($request->filled('nama')) {
+            $query->where('nama', 'like', '%' . $request->nama . '%');
+        }
+
+        // Filter Gender (exact match)
+        if ($request->filled('gender')) {
+            $query->where('gender', $request->gender);
+        }
+
+        // Filter Umur range
+        if ($request->filled('umur_min')) {
+            $query->where('umur', '>=', (int) $request->umur_min);
+        }
+        if ($request->filled('umur_max')) {
+            $query->where('umur', '<=', (int) $request->umur_max);
+        }
+
+        // Filter Kewarganegaraan (LIKE)
+        if ($request->filled('kewarganegaraan')) {
+            $query->where('kewarganegaraan', 'like', '%' . $request->kewarganegaraan . '%');
+        }
+
+        // Filter Bahasa (LIKE)
+        if ($request->filled('bahasa')) {
+            $query->where('bahasa', 'like', '%' . $request->bahasa . '%');
+        }
+
+        // Filter Nomor (LIKE)
+        if ($request->filled('nomor')) {
+            $query->where('nomor', 'like', '%' . $request->nomor . '%');
+        }
+
+        // PAGINATION
+        $perPage = (int) $request->input('pagination', 10);
+
+        if ($perPage === 0) {
+            $perPage = 9999999; // ambil semua
+        }
+
+        $students = $query->paginate($perPage)->withQueryString();
+        return view('index', compact('students'));
     }
+
 
     public function detail($id)
     {
@@ -63,7 +107,8 @@ class StudentController extends Controller
         }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         try {
             $student = Student::findOrFail($id);
             return view('student_update', compact(['student']));

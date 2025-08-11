@@ -10,14 +10,14 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-    
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] flex p-16 flex-col">
     <h1 class=" text-2xl mb-1 text-center font-bold">Students</h1>
-    <a href="{{route('student.create')}}"
+    <a href="{{ route('student.create') }}"
         class="group relative inline-flex self-center w-fit justify-center px-2 py-1 mb-6 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1">
         Create
     </a>
@@ -31,8 +31,80 @@
             <p>Terjadi Kesalahan: {{ session('error') }}</p>
         </div>
     @endif
+    <form method="GET" action="{{ route('home') }}" class="space-y-4 p-4 border rounded bg-gray-50 grid lg:grid-cols-4 gap-x-3">
 
-    <table class="table-auto w-full  ">
+        <!-- Nama -->
+        <div>
+            <label class="block font-semibold mb-1" for="nama">Nama</label>
+            <input type="text" name="nama" id="nama" value="{{ request('nama') }}"
+                class="w-full p-2 border rounded" placeholder="Cari nama...">
+        </div>
+
+        <!-- Gender -->
+        <div>
+            <label class="block font-semibold mb-1" for="gender">Gender</label>
+            <select name="gender" id="gender" class="w-full p-2 border rounded">
+                <option value="">-- Semua --</option>
+                <option value="Laki-laki" {{ request('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                <option value="Perempuan" {{ request('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+            </select>
+        </div>
+
+        <!-- Umur Min & Max -->
+        <div>
+            <label class="block font-semibold mb-1">Umur (Min)</label>
+            <input type="number" name="umur_min" value="{{ request('umur_min') }}" class="w-full p-2 border rounded"
+                min="0" placeholder="Min umur">
+        </div>
+
+        <div>
+            <label class="block font-semibold mb-1">Umur (Max)</label>
+            <input type="number" name="umur_max" value="{{ request('umur_max') }}" class="w-full p-2 border rounded"
+                min="0" placeholder="Max umur">
+        </div>
+
+        <!-- Kewarganegaraan -->
+        <div>
+            <label class="block font-semibold mb-1" for="kewarganegaraan">Kewarganegaraan</label>
+            <input type="text" name="kewarganegaraan" id="kewarganegaraan" value="{{ request('kewarganegaraan') }}"
+                class="w-full p-2 border rounded" placeholder="Cari kewarganegaraan...">
+        </div>
+
+        <!-- Bahasa -->
+        <div>
+            <label class="block font-semibold mb-1" for="bahasa">Bahasa</label>
+            <input type="text" name="bahasa" id="bahasa" value="{{ request('bahasa') }}"
+                class="w-full p-2 border rounded" placeholder="Cari bahasa...">
+        </div>
+
+        <!-- Nomor -->
+        <div>
+            <label class="block font-semibold mb-1" for="nomor">Nomor</label>
+            <input type="text" name="nomor" id="nomor" value="{{ request('nomor') }}"
+                class="w-full p-2 border rounded" placeholder="Cari nomor telepon...">
+        </div>
+
+        <!-- Pagination -->
+        <div>
+            <label class="block font-semibold mb-1" for="nomor">Pagination</label>
+            <select name="pagination" class=" w-full p-2 border rounded">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="0">ALL</option>
+            </select>
+        </div>
+
+        <div class="pt-4">
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 transition">
+                Filter
+            </button>
+            <a href="{{ route('home') }}" class="ml-2 text-gray-600 underline hover:text-gray-900">Reset</a>
+        </div>
+    </form>
+
+    <table class="table-auto w-full mt-4  ">
         <thead>
             <tr class=" ">
                 <th>No</th>
