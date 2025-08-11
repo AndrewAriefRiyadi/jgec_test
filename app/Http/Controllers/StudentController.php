@@ -57,9 +57,52 @@ class StudentController extends Controller
             ]);
             $student = Student::create($validatedData);
             $student_id = $student->id;
-            return redirect()->route('school.create',$student_id)->with('success','Data student berhasil dibuat!');
-        } catch (\Throwable $th){
-            return redirect()->back()->with('error',$th->getMessage())->withInput();
+            return redirect()->route('school.create', $student_id)->with('success', 'Data student berhasil dibuat!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage())->withInput();
+        }
+    }
+
+    public function edit($id){
+        try {
+            $student = Student::findOrFail($id);
+            return view('student_update', compact(['student']));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage())->withInput();
+        }
+    }
+    public function update(Request $request, $id)
+    {
+        try {
+            $student = Student::findOrFail($id);
+
+            $validatedData = $request->validate([
+                'nis' => 'required|string|max:50|unique:students,nis,' . $student->id,
+                'nama' => 'required|string|max:255',
+                'gender' => 'required|in:Laki-laki,Perempuan',
+                'nikah' => 'required|in:Belum Menikah,Menikah',
+                'tanggal_lahir' => 'required|date|before:today',
+                'umur' => 'required|integer|min:0|max:150',
+                'kewarganegaraan' => 'required|string|max:255',
+                'bahasa' => 'required|string|max:255',
+                'domisili' => 'required|string|max:255',
+                'nomor' => 'required|digits_between:10,15',
+                'email' => 'required|email|max:255|unique:students,email,' . $student->id,
+                'tinggi_badan' => 'required|integer|min:30|max:250',
+                'berat_badan' => 'required|integer|min:10|max:200',
+                'ukuran_sepatu' => 'required|integer|min:20|max:50',
+                'agama' => 'required|string|max:255',
+                'kelebihan' => 'required|string|max:255',
+                'kekurangan' => 'required|string|max:255',
+                'promosi' => 'required|string|max:255',
+                'tinggal_jp' => 'required|in:Ya,Tidak',
+                'keterangan_tinggal_jp' => 'nullable|required_if:tinggal_jp,Ya|max:255',
+            ]);
+            $student->update($validatedData);
+
+            return redirect()->route('student.detail', $student->id)->with('success', 'Data student berhasil diperbarui!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage())->withInput();
         }
     }
 

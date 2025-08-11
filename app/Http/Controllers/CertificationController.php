@@ -25,7 +25,7 @@ class CertificationController extends Controller
             ]);
             $validatedData['student_id'] = $student_id;
             Certification::create($validatedData);
-            return redirect()->route('certification.create', $student_id)->with('success', 'Certification berhasil ditambahkan.');
+            return redirect()->route('certif.create', $student_id)->with('success', 'Certification berhasil ditambahkan.');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage())->withInput();
         }

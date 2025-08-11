@@ -22,7 +22,11 @@
     @endif
 
     <div class="w-full shadow p-8">
-        <div class="mb-6 flex justify-end">
+        <div class="mb-6 flex justify-between">
+            <a href="{{ url()->previous() }}"
+                class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
+                ← Kembali
+            </a>
             <a href="{{route('certif.create',$student_id)}}"
                 class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
                 ← Selanjutnya

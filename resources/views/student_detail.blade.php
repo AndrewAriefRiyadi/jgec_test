@@ -20,11 +20,17 @@
         </div>
     @endif
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
+        <div class="mb-6">
+            <a href="/"
+                class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
+                ← Kembali
+            </a>
+        </div>
         <div class="flex justify-between h-fit  ">
             <h1 class="text-2xl font-bold mb-4">{{ $student->nama }}</h1>
             <div class="flex space-x-2 ">
                 {{-- Tombol Edit --}}
-                <a href="#"
+                <a href="{{route('student.edit',$student->id)}}"
                     class="group relative p-2 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
@@ -36,8 +42,6 @@
                         Edit
                     </span>
                 </a>
-
-
                 {{-- Tombol Delete --}}
                 <form action="{{ route('student.delete', $student->id) }}" method="POST"
                     onsubmit="return confirm('Yakin ingin menghapus?')">
@@ -84,7 +88,21 @@
         <hr class="my-6">
 
         <!-- Sekolah -->
-        <h2 class="text-xl font-semibold mb-2 underline">Riwayat Sekolah</h2>
+        <div class="flex gap-2">
+            <h2 class="text-xl font-semibold mb-2 underline">Riwayat Sekolah</h2>
+            <a href="{{route('school.create',$student->id)}}"
+                class="group relative p-1 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.232 5.232l3.536 3.536M9 13l6-6 3.536 3.536L12 16H9v-3z" />
+                </svg>
+                <span
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block whitespace-nowrap text-xs bg-gray-800 text-white rounded px-2 py-1">
+                    Edit
+                </span>
+            </a>
+        </div>
         @forelse ($student->schools as $school)
             <div class="mb-2">
                 <p class="font-medium">{{ $school->nama_sekolah }}</p>
@@ -96,7 +114,21 @@
         @endforelse
 
         <!-- Perusahaan -->
-        <h2 class="text-xl font-semibold mt-6 mb-2 underline">Riwayat Pekerjaan</h2>
+        <div class="flex gap-2">
+            <h2 class="text-xl font-semibold mb-2 underline">Riwayat Pekerjaan</h2>
+            <a href="{{route('company.create',$student->id)}}"
+                class="group relative p-1 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.232 5.232l3.536 3.536M9 13l6-6 3.536 3.536L12 16H9v-3z" />
+                </svg>
+                <span
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block whitespace-nowrap text-xs bg-gray-800 text-white rounded px-2 py-1">
+                    Edit
+                </span>
+            </a>
+        </div>
         @forelse ($student->companies as $company)
             <div class="mb-2">
                 <p class="font-medium">{{ $company->nama_perusahaan }}</p>
@@ -108,7 +140,21 @@
         @endforelse
 
         <!-- Sertifikat -->
-        <h2 class="text-xl font-semibold mt-6 mb-2 underline">Sertifikasi</h2>
+        <div class="flex gap-2">
+            <h2 class="text-xl font-semibold mb-2 underline">Sertifikasi</h2>
+            <a href="{{route('certif.create',$student->id)}}"
+                class="group relative p-1 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.232 5.232l3.536 3.536M9 13l6-6 3.536 3.536L12 16H9v-3z" />
+                </svg>
+                <span
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block whitespace-nowrap text-xs bg-gray-800 text-white rounded px-2 py-1">
+                    Edit
+                </span>
+            </a>
+        </div>
         @forelse ($student->certifications as $certif)
             <div class="mb-2">
                 <p class="font-medium">{{ $certif->nama_certif }}</p>
@@ -117,13 +163,6 @@
         @empty
             <p class="text-gray-500">Tidak ada data sertifikasi</p>
         @endforelse
-
-
-        <div class="mt-6">
-            <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
-                ← Kembali
-            </a>
-        </div>
     </div>
 
 </body>
