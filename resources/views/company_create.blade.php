@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create School</title>
+    <title>Create Company</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -23,43 +23,39 @@
 
     <div class="w-full shadow p-8">
         <div class="mb-6 flex justify-end">
-            {{-- <a href="{{ url()->previous() }}"
+            <a href="#"
                 class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
-                ← Kembali
-            </a> --}}
-            <a href="{{route('company.create',$student_id)}}" class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
                 ← Selanjutnya
             </a>
         </div>
 
-        <h1 class=" text-2xl font-semibold underline text-center">Riwayat Sekolah {{ $student_name }}</h1>
+        <h1 class=" text-2xl font-semibold underline text-center">Riwayat Perusahaan {{ $student_name }}</h1>
         <div class=" flex justify-center">
-            @if ($schools->isEmpty())
-                <h1 class=" text-2xl font-semibold text-red-500 my-4">Belum mempunyai riwayat sekolah!</h1>
+            @if ($companies->isEmpty())
+                <h1 class=" text-2xl font-semibold text-red-500 my-4">Belum mempunyai riwayat perusahaan!</h1>
             @else
                 <table class="table-auto lg:min-w-2xl my-4">
                     <thead>
-                        <tr class=" ">
-                            <th class=" p-2">No</th>
-                            <th>Nama Sekolah</th>
-                            <th>Tahun</th>
-                            <th>Bulan</th>
+                        <tr>
+                            <th class="p-2">No</th>
+                            <th>Nama Perusahaan</th>
+                            <th>Tahun Masuk</th>
+                            <th>Bulan Masuk</th>
                             <th>Status</th>
                             <th>Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($schools as $school)
+                        @foreach ($companies as $company)
                             <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition-colors">
-                                <td class=" text-center p-2">{{ $loop->iteration }}</td>
-                                <td class=" text-center p-2">{{ $school->nama_sekolah }}</td>
-                                <td class=" text-center p-2">{{ $school->tahun_masuksekolah }}</td>
-                                <td class=" text-center p-2">{{ $school->bulan_masuksekolah }}</td>
-                                <td class=" text-center p-2">{{ $school->status_sekolah }}</td>
-                                <td class=" text-center">
-                                    <form action="{{ route('school.delete', [$school->id, $student_id]) }}" method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus?')">
+                                <td class="text-center p-2">{{ $loop->iteration }}</td>
+                                <td class="text-center p-2">{{ $company->nama_perusahaan }}</td>
+                                <td class="text-center p-2">{{ $company->tahun_masukperusahaan }}</td>
+                                <td class="text-center p-2">{{ $company->bulan_masukperusahaan }}</td>
+                                <td class="text-center p-2">{{ $company->status}}</td>
+                                <td class="text-center">
+                                    <form action="{{ route('company.delete', [$company->id, $student_id]) }}"
+                                        method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -82,34 +78,32 @@
                 </table>
             @endif
         </div>
-
-
-        <h1 class="text-2xl font-semibold mb-6 underline">Tambah Data Sekolah</h1>
-        <form action="{{ route('school.insert', $student_id) }}" method="POST"
+        <h1 class="text-2xl font-semibold mb-6 underline">Tambah Data Perusahaan</h1>
+        <form action="#" method="POST"
             class="space-y-4 grid lg:grid-cols-2 gap-x-6">
             @csrf
 
-            <!-- Nama Sekolah -->
+            <!-- Nama Perusahaan -->
             <div>
-                <label class="block mb-1 font-semibold">Nama Sekolah</label>
-                <input type="text" name="nama_sekolah"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 laceholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
-                    placeholder="SMK Negeri 1 Jakarta" maxlength="255" required>
+                <label class="block mb-1 font-semibold">Nama Perusahaan</label>
+                <input type="text" name="nama_perusahaan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
+                    placeholder="PT Maju Jaya" maxlength="255" required>
             </div>
 
             <!-- Tahun Masuk -->
             <div>
                 <label class="block mb-1 font-semibold">Tahun Masuk</label>
-                <input type="number" name="tahun_masuksekolah"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 laceholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                <input type="number" name="tahun_masukperusahaan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
                     placeholder="2018" max="{{ date('Y') }}" required>
             </div>
 
             <!-- Bulan Masuk -->
             <div>
                 <label class="block mb-1 font-semibold">Bulan Masuk</label>
-                <select name="bulan_masuksekolah"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 laceholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                <select name="bulan_masukperusahaan"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
                     required>
                     @foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $bulan)
                         <option value="{{ $bulan }}">{{ $bulan }}</option>
@@ -117,14 +111,14 @@
                 </select>
             </div>
 
-            <!-- Status Sekolah -->
+            <!-- Status Kerja -->
             <div>
-                <label class="block mb-1 font-semibold">Status Sekolah</label>
-                <select name="status_sekolah"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 laceholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                <label class="block mb-1 font-semibold">Status Kerja</label>
+                <select name="status"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 placeholder-shown:border placeholder-shown:border-red-500"
                     required>
                     <option value="Masuk">Masuk</option>
-                    <option value="Lulus">Lulus</option>
+                    <option value="Berhenti">Berhenti</option>
                 </select>
             </div>
 
