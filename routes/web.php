@@ -8,8 +8,12 @@ use App\Models\School;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StudentController::class, 'index'])->name('home');
+
+
+
 Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
 Route::post('/student/create', [StudentController::class, 'insert'])->name('student.insert');
+Route::get('/student/cv/{id}', [StudentController::class, 'cv'])->name('student.cv');
 Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
 Route::put('/student/edit/{id}', [StudentController::class, 'update'])->name('student.update');
 Route::get('/student/{id}', [StudentController::class, 'detail'])->name('student.detail');

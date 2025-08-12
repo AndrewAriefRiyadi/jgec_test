@@ -21,16 +21,30 @@
     @endif
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
         <div class="mb-6">
-            <a href="/"
-                class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
+            <a href="/" class="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
                 ← Kembali
             </a>
         </div>
         <div class="flex justify-between h-fit  ">
             <h1 class="text-2xl font-bold mb-4">{{ $student->nama }}</h1>
             <div class="flex space-x-2 ">
+                {{-- Tombol CV --}}
+                <a href="{{ route('student.cv', $student->id) }}"
+                    class="group relative p-2 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                    <!-- Icon document -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h5l5 5v9a2 2 0 01-2 2z" />
+                    </svg>
+                    <span
+                        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block whitespace-nowrap text-xs bg-gray-800 text-white rounded px-2 py-1">
+                        Download CV
+                    </span>
+                </a>
+
                 {{-- Tombol Edit --}}
-                <a href="{{route('student.edit',$student->id)}}"
+                <a href="{{ route('student.edit', $student->id) }}"
                     class="group relative p-2 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
@@ -90,7 +104,7 @@
         <!-- Sekolah -->
         <div class="flex gap-2 items-center">
             <h2 class="text-xl font-semibold mb-2 underline">Riwayat Sekolah</h2>
-            <a href="{{route('school.create',$student->id)}}"
+            <a href="{{ route('school.create', $student->id) }}"
                 class="group relative p-0.5 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
@@ -116,7 +130,7 @@
         <!-- Perusahaan -->
         <div class="flex gap-2 items-center">
             <h2 class="text-xl font-semibold mb-2 underline">Riwayat Pekerjaan</h2>
-            <a href="{{route('company.create',$student->id)}}"
+            <a href="{{ route('company.create', $student->id) }}"
                 class="group relative p-0.5 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
@@ -142,7 +156,7 @@
         <!-- Sertifikat -->
         <div class="flex gap-2 items-center">
             <h2 class="text-xl font-semibold mb-2 underline">Sertifikasi</h2>
-            <a href="{{route('certif.create',$student->id)}}"
+            <a href="{{ route('certif.create', $student->id) }}"
                 class="group relative p-0.5 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">

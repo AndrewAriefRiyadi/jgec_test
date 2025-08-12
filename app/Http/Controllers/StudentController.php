@@ -73,6 +73,16 @@ class StudentController extends Controller
         }
     }
 
+    public function cv($id){
+        try {
+            $student = Student::with(['schools', 'companies', 'certifications'])->findOrFail($id);
+            
+            return view('cv', compact(['student']));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
     public function create()
     {
         return view('student_create');
