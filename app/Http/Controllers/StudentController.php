@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentsExport;
 
 class StudentController extends Controller
 {
@@ -160,5 +164,38 @@ class StudentController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }
+    }
+
+    public function export(Request $request)
+    {
+        $query = Student::query();
+
+        if ($request->filled('nama')) {
+            $query->where('nama', 'like', '%' . $request->nama . '%');
+        }
+        if ($request->filled('gender')) {
+            $query->where('gender', $request->gender);
+        }
+        if ($request->filled('umur_min')) {
+            $query->where('umur', '>=', $request->umur_min);
+        }
+        if ($request->filled('umur_max')) {
+            $query->where('umur', '<=', $request->umur_max);
+        }
+        if ($request->filled('kewarganegaraan')) {
+            $query->where('kewarganegaraan', 'like', '%' . $request->kewarganegaraan . '%');
+        }
+        if ($request->filled('bahasa')) {
+            $query->where('bahasa', 'like', '%' . $request->bahasa . '%');
+        }
+        if ($request->filled('nomor')) {
+            $query->where('nomor', 'like', '%' . $request->nomor . '%');
+        }
+
+        $students = $query->get();
+
+        $tanggal = Carbon::now()->format('Y_m_d'); // format tanggal YYYY_MM_DD
+
+        return Excel::download(new StudentsExport($students), "data_siswa_{$tanggal}.xlsx");
     }
 }

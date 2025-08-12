@@ -88,10 +88,10 @@
         <hr class="my-6">
 
         <!-- Sekolah -->
-        <div class="flex gap-2">
+        <div class="flex gap-2 items-center">
             <h2 class="text-xl font-semibold mb-2 underline">Riwayat Sekolah</h2>
             <a href="{{route('school.create',$student->id)}}"
-                class="group relative p-1 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                class="group relative p-0.5 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -110,14 +110,14 @@
                     {{ $school->status_sekolah }}</p>
             </div>
         @empty
-            <p class="text-gray-500">Tidak ada data sekolah</p>
+            <p class="text-gray-500 mb-2">Tidak ada data sekolah</p>
         @endforelse
 
         <!-- Perusahaan -->
-        <div class="flex gap-2">
+        <div class="flex gap-2 items-center">
             <h2 class="text-xl font-semibold mb-2 underline">Riwayat Pekerjaan</h2>
             <a href="{{route('company.create',$student->id)}}"
-                class="group relative p-1 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                class="group relative p-0.5 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -136,14 +136,14 @@
                     {{ $company->tahun_masukperusahaan }} - {{ $company->status }}</p>
             </div>
         @empty
-            <p class="text-gray-500">Tidak ada data pekerjaan</p>
+            <p class="text-gray-500 mb-2">Tidak ada data pekerjaan</p>
         @endforelse
 
         <!-- Sertifikat -->
-        <div class="flex gap-2">
+        <div class="flex gap-2 items-center">
             <h2 class="text-xl font-semibold mb-2 underline">Sertifikasi</h2>
             <a href="{{route('certif.create',$student->id)}}"
-                class="group relative p-1 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                class="group relative p-0.5 h-fit text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -156,12 +156,12 @@
             </a>
         </div>
         @forelse ($student->certifications as $certif)
-            <div class="mb-2">
+            <div class="mb-4">
                 <p class="font-medium">{{ $certif->nama_certif }}</p>
                 <p class="text-sm text-gray-600">{{ $certif->bulan }} {{ $certif->tahun }}</p>
             </div>
         @empty
-            <p class="text-gray-500">Tidak ada data sertifikasi</p>
+            <p class="text-gray-500 mb-2">Tidak ada data sertifikasi</p>
         @endforelse
     </div>
 

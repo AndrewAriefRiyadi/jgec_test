@@ -31,7 +31,8 @@
             <p>Terjadi Kesalahan: {{ session('error') }}</p>
         </div>
     @endif
-    <form method="GET" action="{{ route('home') }}" class="space-y-4 p-4 border rounded bg-gray-50 grid lg:grid-cols-4 gap-x-3">
+    <form method="GET" action="{{ route('home') }}"
+        class="space-y-4 p-4 border rounded bg-gray-50 grid lg:grid-cols-4 gap-x-3">
 
         <!-- Nama -->
         <div>
@@ -157,6 +158,17 @@
         </tbody>
     </table>
     <span class=" pt-4 w-full">{{ $students->links() }}</span>
-
+    <form method="GET" action="{{ route('students.export') }}" class="mb-4">
+        <input type="hidden" name="nama" value="{{ request('nama') }}">
+        <input type="hidden" name="gender" value="{{ request('gender') }}">
+        <input type="hidden" name="umur_min" value="{{ request('umur_min') }}">
+        <input type="hidden" name="umur_max" value="{{ request('umur_max') }}">
+        <input type="hidden" name="kewarganegaraan" value="{{ request('kewarganegaraan') }}">
+        <input type="hidden" name="bahasa" value="{{ request('bahasa') }}">
+        <input type="hidden" name="nomor" value="{{ request('nomor') }}">
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+            Export to Excel
+        </button>
+    </form>
 
 </body </html>

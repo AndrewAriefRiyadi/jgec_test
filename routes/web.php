@@ -15,6 +15,8 @@ Route::put('/student/edit/{id}', [StudentController::class, 'update'])->name('st
 Route::get('/student/{id}', [StudentController::class, 'detail'])->name('student.detail');
 Route::delete('/student/{id}', [StudentController::class, 'delete'])->name('student.delete');
 
+Route::get('/export', [StudentController::class, 'export'])->name('students.export');
+
 Route::get('/school/create/{student_id}', [SchoolController::class, 'create'])->name('school.create');
 Route::post('/school/create/{student_id}', [SchoolController::class, 'insert'])->name('school.insert');
 Route::delete('/school/delete/{id}/{student_id}', [SchoolController::class, 'delete'])->name('school.delete');
