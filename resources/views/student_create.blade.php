@@ -114,21 +114,22 @@
             <div>
                 <label class="block mb-1 font-semibold">Tinggi Badan (cm)</label>
                 <input type="number" name="tinggi_badan"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500
+                    invalid:bg-gray-200 invalid:border invalid:border-red-500"
                     placeholder="185" min="30" required oninput="if(this.value < 0) this.value = 0">
             </div>
             
             <div>
                 <label class="block mb-1 font-semibold">Berat Badan (kg)</label>
                 <input type="number" name="berat_badan"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500 invalid:bg-gray-200 invalid:border invalid:border-red-500"
                     placeholder="60" min="10" required oninput="if(this.value < 0) this.value = 0">
             </div>
             
             <div>
                 <label class="block mb-1 font-semibold">Ukuran Sepatu</label>
                 <input type="number" name="ukuran_sepatu"
-                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500"
+                    class="w-full bg-gray-100 p-2 rounded hover:bg-gray-300 transition placeholder-shown:bg-gray-200 placeholder-shown:border placeholder-shown:border-red-500 invalid:bg-gray-200 invalid:border invalid:border-red-500"
                     placeholder="39" min="20" required oninput="if(this.value < 0) this.value = 0">
             </div>
             

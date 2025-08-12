@@ -78,6 +78,7 @@ class StudentController extends Controller
         try {
             $student = Student::with(['schools', 'companies', 'certifications'])->findOrFail($id);
             $pdf = Pdf::loadView('cv',compact('student'))->setPaper('a4','portrait');
+            // return $pdf->download('cv.pdf');
             // return $pdf->stream('cv.pdf');
             return view('cv', compact(['student']));
             
