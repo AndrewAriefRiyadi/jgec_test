@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentsExport;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StudentController extends Controller
 {
@@ -76,8 +77,10 @@ class StudentController extends Controller
     public function cv($id){
         try {
             $student = Student::with(['schools', 'companies', 'certifications'])->findOrFail($id);
-            
+            $pdf = Pdf::loadView('cv',compact('student'))->setPaper('a4','portrait');
+            // return $pdf->stream('cv.pdf');
             return view('cv', compact(['student']));
+            
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }
